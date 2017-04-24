@@ -37,7 +37,7 @@ Npm install aurelia-auth --save
 # How to use aurelia-auth?
 aurelia-auth does not contain any UI widgets. It's conceived as a simple service with following interface:
 ```js
-login(email, password)
+login(email, password, redirect) // redirect is optional
 logout(redirectUri)
 authenticate(provider, redirect, userData)
 signup(displayName, email, password)

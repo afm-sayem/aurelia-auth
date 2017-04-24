@@ -91,10 +91,7 @@ export class Authentication {
     if (idToken) {
       this.storage.set(this.idTokenName, idToken);
     }
-
-    if (this.config.loginRedirect && !redirect) {
-      window.location.href = this.getLoginRedirect();
-    } else if (redirect && isString(redirect)) {
+    if (redirect && isString(redirect)) {
       window.location.href = window.encodeURI(redirect);
     }
   }

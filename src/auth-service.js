@@ -57,7 +57,7 @@ export class AuthService {
       .then(status)
       .then((response) => {
         if (this.config.loginOnSignup) {
-          this.auth.setToken(response);
+          this.auth.setToken(response, this.config.loginRedirect);
         } else if (this.config.signupRedirect) {
           window.location.href = this.config.signupRedirect;
         }
@@ -66,7 +66,7 @@ export class AuthService {
       });
   }
 
-  login(email, password) {
+  login(email, password, redirect = this.auth.getLoginRedirect()) {
     let loginUrl = this.auth.getLoginUrl();
     let content;
     if (typeof arguments[1] !== 'string') {
@@ -85,7 +85,7 @@ export class AuthService {
     })
       .then(status)
       .then((response) => {
-        this.auth.setToken(response);
+        this.auth.setToken(response, redirect);
         this.eventAggregator.publish('auth:login', response);
         return response;
       });
